@@ -25,13 +25,13 @@
 #include <fstream>
 #include <iostream>
 
-#include "OpenSSLConnection.hpp"
+#include "aws-iot-device-sdk-cpp.h"
 
 #include "util/logging/Logging.hpp"
 #include "util/logging/LogMacros.hpp"
 #include "util/logging/ConsoleLogSystem.hpp"
 
-#include "ConfigCommon.hpp"
+#include "Arduino.h"
 #include "Discovery.hpp"
 
 #define LOG_TAG_DISCOVERY_SAMPLE "[Sample - Discovery]"
@@ -330,7 +330,7 @@ namespace awsiotsdk {
     }
 }
 
-int main(int argc, char **argv) {
+void setup() {
     std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system =
         std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
     awsiotsdk::util::Logging::InitializeAWSLogging(p_log_system);
@@ -348,6 +348,8 @@ int main(int argc, char **argv) {
 #endif
 
     awsiotsdk::util::Logging::ShutdownAWSLogging();
-    return static_cast<int>(rc);
 }
 
+void loop() {
+  delay(100);
+}
