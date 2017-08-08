@@ -1,0 +1,22 @@
+#######################################
+# Syntax Coloring Map For AWS IOT CPP SDK
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+NetworkConnection		KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+Connect				KEYWORD2
+Write				KEYWORD2
+Read				KEYWORD2
+Disconnect 			KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
