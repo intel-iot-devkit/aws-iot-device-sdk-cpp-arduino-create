@@ -5,6 +5,9 @@ mv samples examples
 #Remove websocket and mbedtls
 rm -rf network/MbedTLS
 rm -rf network/WebSocket
+#Move common, network to src
+mv common/ src/
+mv network/ src/
 #Create mega header file
 #search_dir=src/
 #for entry in "$search_dir"*; do
@@ -19,9 +22,6 @@ rm -rf include/
 #Add corei7 folder to support load flags
 mkdir src/corei7
 :> src/corei7/empty
-#Move common, network to src
-mv common/ src/
-mv network/ src/
 #Remove doxygen, cli, tests
 rm -rf doxygen
 rm -rf cli
