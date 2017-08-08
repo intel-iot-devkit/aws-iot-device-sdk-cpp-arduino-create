@@ -22,19 +22,12 @@
 #include <chrono>
 #include <cstring>
 
-#ifdef USE_WEBSOCKETS
-#include "WebSocketConnection.hpp"
-#elif defined USE_MBEDTLS
-#include "MbedTLSConnection.hpp"
-#else
-#include "OpenSSLConnection.hpp"
-#endif
-
+#include "aws-iot-device-sdk-cpp.h"
 #include "util/logging/Logging.hpp"
 #include "util/logging/LogMacros.hpp"
 #include "util/logging/ConsoleLogSystem.hpp"
 
-#include "ConfigCommon.hpp"
+#include "Arduino.h"
 #include "PubSub.hpp"
 
 #define LOG_TAG_PUBSUB "[Sample - PubSub]"
@@ -267,7 +260,7 @@ namespace awsiotsdk {
     }
 }
 
-int main(int argc, char **argv) {
+void setup() {
     std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system =
         std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
     awsiotsdk::util::Logging::InitializeAWSLogging(p_log_system);
@@ -285,5 +278,7 @@ int main(int argc, char **argv) {
 #endif
 
     awsiotsdk::util::Logging::ShutdownAWSLogging();
-    return static_cast<int>(rc);
+}
+void loop(){
+  delay(100);
 }
