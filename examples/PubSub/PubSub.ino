@@ -123,10 +123,10 @@ namespace awsiotsdk {
 
 #ifdef USE_WEBSOCKETS
             p_network_connection_ = std::shared_ptr<NetworkConnection>(
-                new network::WebSocketConnection(ConfigCommon::endpoint_, ConfigCommon::endpoint_https_port_,
-                                                 ConfigCommon::root_ca_path_, ConfigCommon::aws_region_,
-                                                 ConfigCommon::aws_access_key_id_,
-                                                 ConfigCommon::aws_secret_access_key_,
+                new network::WebSocketConnection(SECRET_ENDPOINT, ConfigCommon::endpoint_https_port_,
+                                                 SECRET_ROOT_CA, ConfigCommon::aws_region_,
+                                                 SECRET_CLIENT_CERT,
+                                                 SECRET_CLIENT_KEY,
                                                  ConfigCommon::aws_session_token_,
                                                  ConfigCommon::tls_handshake_timeout_,
                                                  ConfigCommon::tls_read_timeout_,
@@ -137,11 +137,11 @@ namespace awsiotsdk {
                 rc = ResponseCode::FAILURE;
             }
 #elif defined USE_MBEDTLS
-            p_network_connection_ = std::make_shared<network::MbedTLSConnection>(ConfigCommon::endpoint_,
+            p_network_connection_ = std::make_shared<network::MbedTLSConnection>(SECRET_ENDPOINT,
                                                                                  ConfigCommon::endpoint_mqtt_port_,
-                                                                                 ConfigCommon::root_ca_path_,
-                                                                                 ConfigCommon::client_cert_path_,
-                                                                                 ConfigCommon::client_key_path_,
+                                                                                 SECRET_ROOT_CA,
+                                                                                 SECRET_CLIENT_CERT,
+                                                                                 SECRET_CLIENT_KEY,
                                                                                  ConfigCommon::tls_handshake_timeout_,
                                                                                  ConfigCommon::tls_read_timeout_,
                                                                                  ConfigCommon::tls_write_timeout_,
@@ -153,11 +153,11 @@ namespace awsiotsdk {
             }
 #else
             std::shared_ptr<network::OpenSSLConnection> p_network_connection =
-                std::make_shared<network::OpenSSLConnection>(ConfigCommon::endpoint_,
+                std::make_shared<network::OpenSSLConnection>(SECRET_ENDPOINT,
                                                              ConfigCommon::endpoint_mqtt_port_,
-                                                             ConfigCommon::root_ca_path_,
-                                                             ConfigCommon::client_cert_path_,
-                                                             ConfigCommon::client_key_path_,
+                                                             SECRET_ROOT_CA,
+                                                             SECRET_CLIENT_CERT,
+                                                             SECRET_CLIENT_KEY,
                                                              ConfigCommon::tls_handshake_timeout_,
                                                              ConfigCommon::tls_read_timeout_,
                                                              ConfigCommon::tls_write_timeout_, true);
