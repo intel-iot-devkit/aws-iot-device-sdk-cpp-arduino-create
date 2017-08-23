@@ -29,8 +29,9 @@ rm -rf tests
 #Move readme to extras
 mkdir extras
 mv *.md extras/
-mv LICENSE extras/
-mv NOTICE extras/
+#Move licensing to src
+mv LICENSE src/
+mv NOTICE src/
 #Get rapidJson and its license
 git clone https://github.com/miloyip/rapidjson.git tmp
 mv tmp/include/rapidjson src/
