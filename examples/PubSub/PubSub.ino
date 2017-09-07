@@ -18,7 +18,40 @@
  * @brief Sample demonstrating MQTT operations
  *
  */
-
+/*********************************PRE-REQUISITES**************************************
+ * This sample needs credentials and keys obtained from AWS.
+ *
+ * 1. Sign in to the AWS IOT hub :
+ * http://docs.aws.amazon.com/iot/latest/developerguide/iot-console-signin.html
+ * 2. Register a device in the thing registry :
+ * http://docs.aws.amazon.com/iot/latest/developerguide/register-device.html
+ * 3. Create and Activate a Device Certificate :
+ * http://docs.aws.amazon.com/iot/latest/developerguide/create-device-certificate.html
+ *
+ * At the end of this step, you would have these values :
+ * 1. Thing Endpoint(aka Resource Name or ARN) e.g. arn:aws:iot:us-west-2:3211313547:thing/SampleThing
+ * 2. Root Certificate from Symantec (a long text string)
+ * 3. Thing Certificate(aka Client Certificate) e.g. content of file named like 121212.cert.pem
+ * 4. Client Key e.g. content of file named like 121212.private.key
+ *
+ * Provide these values to this sample by adding them to the text fileds on the 'SECRET' tab in this sample.
+ * The 'SECRET' tab is part of this sample's sketch and should be visible.
+ *
+ * Alternatively, replace the macro strings in the code with the values.
+ *
+ * While the sample is ready by this step, there is still work to be done on the IOT Hub for all of this to work together.
+ * 5. Create an AWS IOT Policy
+ * http://docs.aws.amazon.com/iot/latest/developerguide/create-iot-policy.html
+ * 6. Attach the policy to the Device Certificate
+ * http://docs.aws.amazon.com/iot/latest/developerguide/attach-policy-to-certificate.html
+ * 7. Attach the certificate to a thing
+ * http://docs.aws.amazon.com/iot/latest/developerguide/attach-cert-thing.html
+ *
+ * The portal setup is complete.
+ * Build and run the sample to see messages being sent to the AWS IOT Dashboard.
+ * https://us-west-2.console.aws.amazon.com/iotv2/home?region=us-west-2#/dashboard
+ *
+ **************************************************************************************/
 #include <chrono>
 #include <cstring>
 
