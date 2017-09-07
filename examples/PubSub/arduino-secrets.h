@@ -1,0 +1,5 @@
+#define SECRET_ENDPOINT ""
+#define SECRET_ROOT_CA ""
+#define SECRET_CLIENT_CERT ""
+#define SECRET_CLIENT_KEY ""
+
