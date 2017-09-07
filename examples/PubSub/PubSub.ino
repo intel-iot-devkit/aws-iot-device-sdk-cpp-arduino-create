@@ -62,6 +62,7 @@
 
 #include "Arduino.h"
 #include "PubSub.hpp"
+#include "arduino-secrets.h"
 
 #define LOG_TAG_PUBSUB "[Sample - PubSub]"
 #define MESSAGE_COUNT 5
