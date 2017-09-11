@@ -34,10 +34,7 @@
  * 3. Thing Certificate(aka Client Certificate) e.g. content of file named like 121212.cert.pem
  * 4. Client Key e.g. content of file named like 121212.private.key
  *
- * Provide these values to this sample by adding them to the text fileds on the 'SECRET' tab in this sample.
- * The 'SECRET' tab is part of this sample's sketch and should be visible.
- *
- * Alternatively, replace the macro strings in the code with the values.
+ * Keep these values safe and separate for use in the sample.
  *
  * While the sample is ready by this step, there is still work to be done on the IOT Hub for all of this to work together.
  * 5. Create an AWS IOT Policy
@@ -48,6 +45,11 @@
  * http://docs.aws.amazon.com/iot/latest/developerguide/attach-cert-thing.html
  *
  * The portal setup is complete.
+ *
+ * Once you have the endpoint, Root certificate, Things Certificate and Client Key,
+ * provide these values to this sample by adding them to the text fileds on the 'SECRET' tab in this sample.
+ * The 'SECRET' tab is part of this sample's sketch and should be visible.
+ * Alternatively, replace the macro strings in the code with the values.
  * Build and run the sample to see messages being sent to the AWS IOT Dashboard.
  * https://us-west-2.console.aws.amazon.com/iotv2/home?region=us-west-2#/dashboard
  *
