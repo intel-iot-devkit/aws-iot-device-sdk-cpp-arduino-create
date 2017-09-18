@@ -43,7 +43,7 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step9.png)
 
-10.  Go to ‘Security’ > ‘Certificates’ and click on ‘Create Certificate’.
+10.  Go to ‘Security’ , then ‘Certificates’ and click on ‘Create Certificate’.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png)
 
