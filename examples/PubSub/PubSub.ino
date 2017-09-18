@@ -157,37 +157,6 @@ namespace awsiotsdk {
         ResponseCode PubSub::InitializeTLS() {
             ResponseCode rc = ResponseCode::SUCCESS;
 
-#ifdef USE_WEBSOCKETS
-            p_network_connection_ = std::shared_ptr<NetworkConnection>(
-                new network::WebSocketConnection(SECRET_ENDPOINT, ConfigCommon::endpoint_https_port_,
-                                                 SECRET_ROOT_CA, ConfigCommon::aws_region_,
-                                                 SECRET_CLIENT_CERT,
-                                                 SECRET_CLIENT_KEY,
-                                                 ConfigCommon::aws_session_token_,
-                                                 ConfigCommon::tls_handshake_timeout_,
-                                                 ConfigCommon::tls_read_timeout_,
-                                                 ConfigCommon::tls_write_timeout_, true));
-            if (nullptr == p_network_connection_) {
-                AWS_LOG_ERROR(LOG_TAG_PUBSUB, "Failed to initialize Network Connection. %s",
-                              ResponseHelper::ToString(rc).c_str());
-                rc = ResponseCode::FAILURE;
-            }
-#elif defined USE_MBEDTLS
-            p_network_connection_ = std::make_shared<network::MbedTLSConnection>(SECRET_ENDPOINT,
-                                                                                 ConfigCommon::endpoint_mqtt_port_,
-                                                                                 SECRET_ROOT_CA,
-                                                                                 SECRET_CLIENT_CERT,
-                                                                                 SECRET_CLIENT_KEY,
-                                                                                 ConfigCommon::tls_handshake_timeout_,
-                                                                                 ConfigCommon::tls_read_timeout_,
-                                                                                 ConfigCommon::tls_write_timeout_,
-                                                                                 true);
-            if (nullptr == p_network_connection_) {
-                AWS_LOG_ERROR(LOG_TAG_PUBSUB, "Failed to initialize Network Connection. %s",
-                              ResponseHelper::ToString(rc).c_str());
-                rc = ResponseCode::FAILURE;
-            }
-#else
             std::shared_ptr<network::OpenSSLConnection> p_network_connection =
                 std::make_shared<network::OpenSSLConnection>(SECRET_ENDPOINT,
                                                              ConfigCommon::endpoint_mqtt_port_,
@@ -207,7 +176,6 @@ namespace awsiotsdk {
             } else {
                 p_network_connection_ = std::dynamic_pointer_cast<NetworkConnection>(p_network_connection);
             }
-#endif
             return rc;
         }
 
