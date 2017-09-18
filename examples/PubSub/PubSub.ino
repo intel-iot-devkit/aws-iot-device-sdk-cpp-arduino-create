@@ -56,6 +56,7 @@
  **************************************************************************************/
 #include <chrono>
 #include <cstring>
+#include <regex>
 
 #include "aws-iot-device-sdk-cpp.h"
 #include "util/logging/Logging.hpp"
@@ -301,10 +302,10 @@ void setup() {
     //Convert the certificate strings to be compatible with SSL
     const auto targetCrt = std::regex{" (?!CERTIFICATE)"};
     const auto replacement = "\n";
-    rootCAString = std::regex_replace(SECRET_ROOT_CA_STRING_OR_PATH, targetCrt, replacement);
-    clientCertString = std::regex_replace(SECRET_CLIENT_CERT_STRING_OR_PATH, targetCrt, replacement);
+    rootCAString = std::regex_replace(SECRET_ROOT_CA, targetCrt, replacement);
+    clientCertString = std::regex_replace(SECRET_CLIENT_CERT, targetCrt, replacement);
     const auto targetKey = std::regex{" (?!RSA)(?!PRIVATE)(?!KEY)"};
-    clientKeyString = std::regex_replace(SECRET_CLIENT_PRIVATE_KEY_STRING_OR_PATH, targetKey, replacement);
+    clientKeyString = std::regex_replace(SECRET_CLIENT_PRIVATE_KEY, targetKey, replacement);
 
     std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system =
         std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
