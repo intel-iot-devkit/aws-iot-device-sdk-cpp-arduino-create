@@ -6,7 +6,7 @@
 
 2.  Search for IOT Services and find ‘AWS IoT’
 
-    ![](media/image1.png){width="6.5in" height="4.635416666666667in"}
+    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step1.png){width="6.5in" height="4.635416666666667in"}
 
 3.  Click get Started![](media/image2.png){width="6.5in"
     height="4.160416666666666in"}
