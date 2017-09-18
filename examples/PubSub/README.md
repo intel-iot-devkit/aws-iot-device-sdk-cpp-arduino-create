@@ -39,13 +39,11 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step8.png)
 
-9.  Give a Name e.g. ‘Policy-01’. Add a statement with Action ‘iot:\*’,
-    Resource ARN ‘\*’ and Effect ‘Allow’. Click on ‘CREATE’.
+9.  Give a Name e.g. ‘Policy-01’. Add a statement with Action ‘iot:\*’, Resource ARN ‘\*’ and Effect ‘Allow’. Click on ‘CREATE’.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step9.png)
     
-10.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create
-    Certificate’
+10.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create Certificate’
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png)
 
@@ -53,8 +51,7 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step6.png)
 
-12.  Download the four files and click ‘Activate’. Then click ‘Attach a
-    Policy’
+12.  Download the four files and click ‘Activate’. Then click ‘Attach a Policy’
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
