@@ -48,7 +48,7 @@
 #define SDK_CONFIG_TLS_HANDSHAKE_TIMEOUT_MSECS_KEY "tls_handshake_timeout_msecs"
 #define SDK_CONFIG_TLS_READ_TIMEOUT_MSECS_KEY "tls_read_timeout_msecs"
 #define SDK_CONFIG_TLS_WRITE_TIMEOUT_MSECS_KEY "tls_write_timeout_msecs"
-
+#define SDK_CONFIG_LOAD_CRTS_AS_STRINGS "load_crts_as_strings"
 // Websocket settings
 #define SDK_CONFIG_AWS_REGION_KEY "aws_region"
 #define SDK_CONFIG_AWS_ACCESS_KEY_ID_KEY "aws_access_key_id"
@@ -103,6 +103,7 @@ namespace awsiotsdk {
     size_t ConfigCommon::max_pending_acks_;
     size_t ConfigCommon::maximum_outgoing_action_queue_length_;
     uint32_t ConfigCommon::action_processing_rate_hz_;
+    bool ConfigCommon::load_crts_as_strings_;
 
     void ConfigCommon::LogParseError(const ResponseCode &response_code, const util::JsonDocument &config, util::String key) {
         AWS_LOG_ERROR(LOG_TAG_SAMPLE_CONFIG_COMMON,
@@ -122,7 +123,7 @@ namespace awsiotsdk {
         return current_working_directory;
     }
 
-    ResponseCode ConfigCommon::InitializeCommon(const util::String &config_file_relative_path) {
+    ResponseCode ConfigCommon::InitializeCommon(const util::String &config_file_relative_path_or_string) {
         util::String config_file_absolute_path = GetCurrentPath();
 
 #ifdef WIN32
@@ -130,15 +131,18 @@ namespace awsiotsdk {
 #else
         config_file_absolute_path.append("/");
 #endif
-        config_file_absolute_path.append(config_file_relative_path);
+        config_file_absolute_path.append(config_file_relative_path_or_string);
         ResponseCode rc = util::JsonParser::InitializeFromJsonFile(sdk_config_json_, config_file_absolute_path);
         if (ResponseCode::SUCCESS != rc) {
-            AWS_LOG_ERROR(LOG_TAG_SAMPLE_CONFIG_COMMON,
-                          "Error in Parsing. %s\n parse error code : %d, offset : %d",
-                          ResponseHelper::ToString(rc).c_str(),
-                          static_cast<int>(util::JsonParser::GetParseErrorCode(sdk_config_json_)),
-                          static_cast<unsigned int>(util::JsonParser::GetParseErrorOffset(sdk_config_json_)));
-            return rc;
+            ResponseCode rc = util::JsonParser::InitializeFromJsonString(sdk_config_json_, config_file_relative_path_or_string);
+            if (ResponseCode::SUCCESS != rc) {
+                AWS_LOG_ERROR(LOG_TAG_SAMPLE_CONFIG_COMMON,
+                "Error in Parsing. %s\n parse error code : %d, offset : %d",
+                ResponseHelper::ToString(rc).c_str(),
+                static_cast<int>(util::JsonParser::GetParseErrorCode(sdk_config_json_)),
+                static_cast<unsigned int>(util::JsonParser::GetParseErrorOffset(sdk_config_json_)));
+                return rc;
+            }
         }
 
         util::String temp_str;
@@ -319,6 +323,12 @@ namespace awsiotsdk {
             return rc;
         }
         discover_action_timeout_ = std::chrono::milliseconds(temp);
+
+        rc = util::JsonParser::GetBoolValue(sdk_config_json_, SDK_CONFIG_LOAD_CRTS_AS_STRINGS, load_crts_as_strings_);
+        if (ResponseCode::SUCCESS != rc) {
+            LogParseError(rc, sdk_config_json_, SDK_CONFIG_LOAD_CRTS_AS_STRINGS);
+            return rc;
+        }
 
         return rc;
     }

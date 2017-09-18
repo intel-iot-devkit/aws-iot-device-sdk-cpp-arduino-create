@@ -62,6 +62,7 @@ namespace awsiotsdk {
         static size_t max_pending_acks_;
         static size_t maximum_outgoing_action_queue_length_;
         static uint32_t action_processing_rate_hz_;
+        static bool load_crts_as_strings_;
 
         static ResponseCode InitializeCommon(const util::String &config_file_path);
         static util::String GetCurrentPath();

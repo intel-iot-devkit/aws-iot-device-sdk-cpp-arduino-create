@@ -66,10 +66,12 @@ namespace awsiotsdk {
                                              std::chrono::milliseconds tls_handshake_timeout,
                                              std::chrono::milliseconds tls_read_timeout,
                                              std::chrono::milliseconds tls_write_timeout,
-                                             bool server_verification_flag)
+                                             bool server_verification_flag,
+                                             bool load_crts_as_strings)
             : OpenSSLConnection(endpoint, endpoint_port, tls_handshake_timeout, tls_read_timeout, tls_write_timeout,
                                 server_verification_flag) {
             root_ca_location_ = root_ca_location;
+            load_crts_as_strings_ = load_crts_as_strings;
             device_cert_location_ = device_cert_location;
             device_private_key_location_ = device_private_key_location;
         }
@@ -252,26 +254,77 @@ namespace awsiotsdk {
 
         ResponseCode OpenSSLConnection::LoadCerts() {
             AWS_LOG_DEBUG(OPENSSL_WRAPPER_LOG_TAG, "Root CA : %s", root_ca_location_.c_str());
-            if (!SSL_CTX_load_verify_locations(p_ssl_context_, root_ca_location_.c_str(), NULL)) {
-                AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Root CA Loading error");
-                return ResponseCode::NETWORK_SSL_ROOT_CRT_PARSE_ERROR;
-            }
-
-            if (0 < device_cert_location_.length() && 0 < device_private_key_location_.length()) {
-                AWS_LOG_DEBUG(OPENSSL_WRAPPER_LOG_TAG, "Device crt : %s", device_cert_location_.c_str());
-                if (!SSL_CTX_use_certificate_chain_file(p_ssl_context_, device_cert_location_.c_str())) {
-                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Certificate Loading error");
-                    return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+            if(!load_crts_as_strings_) {
+                if (!SSL_CTX_load_verify_locations(p_ssl_context_, root_ca_location_.c_str(), NULL)) {
+                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Root CA Loading error");
+                    return ResponseCode::NETWORK_SSL_ROOT_CRT_PARSE_ERROR;
                 }
-                AWS_LOG_DEBUG(OPENSSL_WRAPPER_LOG_TAG, "Device privkey : %s", device_private_key_location_.c_str());
-                if (1 != SSL_CTX_use_PrivateKey_file(p_ssl_context_,
-                                                     device_private_key_location_.c_str(),
-                                                     SSL_FILETYPE_PEM)) {
-                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Private Key Loading error");
-                    return ResponseCode::NETWORK_SSL_KEY_PARSE_ERROR;
+
+                if (0 < device_cert_location_.length() && 0 < device_private_key_location_.length()) {
+                    AWS_LOG_DEBUG(OPENSSL_WRAPPER_LOG_TAG, "Device crt : %s", device_cert_location_.c_str());
+                    if (!SSL_CTX_use_certificate_chain_file(p_ssl_context_, device_cert_location_.c_str())) {
+                        AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Certificate Loading error");
+                        return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+                    }
+                    AWS_LOG_DEBUG(OPENSSL_WRAPPER_LOG_TAG, "Device privkey : %s", device_private_key_location_.c_str());
+                    if (1 != SSL_CTX_use_PrivateKey_file(p_ssl_context_,
+                                                         device_private_key_location_.c_str(),
+                                                         SSL_FILETYPE_PEM)) {
+                        AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Private Key Loading error");
+                        return ResponseCode::NETWORK_SSL_KEY_PARSE_ERROR;
+                    }
+                }
+            } else {
+                //Load the certificates as strings
+
+                X509_STORE* store = SSL_CTX_get_cert_store(p_ssl_context_);
+                BIO *rbio;
+                X509 *root_ca;
+                rbio = BIO_new(BIO_s_mem());
+                BIO_puts(rbio, root_ca_location_.c_str());
+                root_ca = PEM_read_bio_X509(rbio, NULL, 0, NULL);
+                if(root_ca == NULL) {
+                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, "Root CA string read error");
+                    return ResponseCode::NETWORK_SSL_ROOT_CRT_PARSE_ERROR;
+                }
+                if(!X509_STORE_add_cert(store, root_ca)) {
+                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Root CA String store add error");
+                    return ResponseCode::NETWORK_SSL_ROOT_CRT_PARSE_ERROR;
+                }
+                BIO_free(rbio);
+                if (0 < device_cert_location_.length() && 0 < device_private_key_location_.length()) {
+                    BIO *cbio;
+                    X509 *device_cert;
+                    cbio = BIO_new(BIO_s_mem());
+                    BIO_puts(cbio, device_cert_location_.c_str());
+                    device_cert = PEM_read_bio_X509(cbio, NULL, 0, NULL);
+                    if(device_cert == NULL) {
+                        AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Certificate string read error");
+                        return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+                    }
+                    if(!SSL_CTX_use_certificate(p_ssl_context_, device_cert)) {
+                       AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, "Device Certificate string use error");
+                        return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+                    }
+                    BIO_free(cbio);
+
+                    BIO *kbio;
+                    RSA *device_private_key;
+                    kbio = BIO_new(BIO_s_mem());
+                    BIO_puts(kbio, device_private_key_location_.c_str());
+                    device_private_key = PEM_read_bio_RSAPrivateKey(kbio, NULL, 0, NULL);
+                    if(device_private_key == NULL) {
+                        AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " Device Private Key string read error");
+                        return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+                    }
+                    if(!SSL_CTX_use_RSAPrivateKey(p_ssl_context_, device_private_key)) {
+                       AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, "Device Private Key string use error");
+                        return ResponseCode::NETWORK_SSL_DEVICE_CRT_PARSE_ERROR;
+                    }
+                    BIO_free(kbio);
+
                 }
             }
-
             certificates_read_flag_ = true;
             return ResponseCode::SUCCESS;
         }

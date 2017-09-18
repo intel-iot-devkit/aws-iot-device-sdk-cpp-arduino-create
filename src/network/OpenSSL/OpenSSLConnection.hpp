@@ -64,6 +64,7 @@ namespace awsiotsdk {
             struct timeval tls_read_timeout_;           ///< Timeout for the TLS Read command
             struct timeval tls_write_timeout_;          ///< Timeout for the TLS Write command
 
+            bool load_crts_as_strings_;					///< Boolean. True = load root certificate, device certificate, device private key from string instead of a file.
             // Endpoint information
             uint16_t endpoint_port_;                    ///< Endpoint port
             util::String endpoint_;                     ///< Endpoint for this connection
@@ -173,7 +174,7 @@ namespace awsiotsdk {
                               util::String device_cert_location, util::String device_private_key_location,
                               std::chrono::milliseconds tls_handshake_timeout,
                               std::chrono::milliseconds tls_read_timeout, std::chrono::milliseconds tls_write_timeout,
-                              bool server_verification_flag);
+                              bool server_verification_flag, bool load_crts_as_strings);
 
             OpenSSLConnection(util::String endpoint, uint16_t endpoint_port, util::String root_ca_location,
                               std::chrono::milliseconds tls_handshake_timeout,
