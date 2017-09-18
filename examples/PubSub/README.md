@@ -32,7 +32,7 @@
 7.  Click on ‘Interact’ and copy the HTTPS endpoint value. This value
     will be used in the sample.
 
-    (![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step11.png)
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step11.png)
     
 8.  Click the back arrow to get back to the main page and click on
     ‘Security’ &gt; ‘Policies’ . Then click ‘Create a Policy’
@@ -43,7 +43,7 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step9.png)
 
-10.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create Certificate’
+10.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create Certificate’.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png)
 
