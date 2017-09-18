@@ -6,22 +6,25 @@
 
 2.  Search for IOT Services and find ‘AWS IoT’
 
-    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step1.png){width="6.5in" height="4.635416666666667in"}
+    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step2.png){width="6.5in" height="4.635416666666667in"}
 
-3.  Click get Started![](media/image2.png){width="6.5in"
+3.  Click get Started
+    
+    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step3.png){width="6.5in"
     height="4.160416666666666in"}
 
 4.  Click on Registry &gt; Things &gt; Register a
-    Thing![](media/image3.png){width="6.5in"
+    Thing
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4.png){width="6.5in"
     height="3.0097222222222224in"}
 
 5.  Enter a thing name e.g. ‘Thing-01’ and click ‘Create Thing’
 
-    ![](media/image4.png){width="6.5in" height="2.254166666666667in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png){width="6.5in" height="2.254166666666667in"}
 
 6.  The thing would be created. Click on it to see its details.
 
-![](media/image5.PNG){width="5.575483377077865in"
+![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4Result.PNG){width="5.575483377077865in"
 height="3.9586767279090114in"}
 
 1.  Click on ‘Interact’ and copy the HTTPS endpoint value. This value
