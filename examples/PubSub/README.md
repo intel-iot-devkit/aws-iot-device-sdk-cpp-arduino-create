@@ -56,9 +56,9 @@
 12.  Download the four files and click ‘Activate’. Then click ‘Attach a
     Policy’
 
-> ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
-1.  Select the policy created in previous steps. Click ‘Done’.
+13.  Select the policy created in previous steps. Click ‘Done’.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step10.png)
     
@@ -68,7 +68,7 @@
     sample file’s \#define. The client ID and thing name are same.
     Update the sample pub-sub topic if you want.
 
-    ![](media/image13.png){width="6.5in" height="4.527083333333334in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/SampleStep1.png)
 
     2\. Switch to the SECRET tab. Open the files downloaded as text file and
     copy the string to the entries in the secret tab.
@@ -81,7 +81,7 @@
 
     SECRET\_CLIENT\_PRIVATE\_KEY : Content of file ending in
     \*-private.pem.key.
-
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/SampleStep2.png)
     Click ‘Save’ and Verify and upload the sample to device.
 
     Note : To be more secure, it is recommended that the root
@@ -98,21 +98,20 @@
 1.  A graphical representation of device connections and messages can be
     seen on the dashboard.
 
-    ![](media/image14.png){width="6.5in" height="3.432638888888889in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png
 
 2.  The sample’s published messages can be tested by received by
     subscribing to the topic through the TEST widget.
 
     Click on ‘TEST’ and enter the name of the thing that was created
     earlier e.g. ‘thing-01’. Client ID and thing name are same. Click
-    ‘Connect’.![](media/image15.png){width="6.5in"
-    height="1.9958333333333333in"}
-
+    ‘Connect’.
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep1.png)
+    
     Enter the topic that the sample is configured to. This is the value
     of SDK\_SAMPLE\_TOPIC in the program. Click ‘Subscribe to Topic’
-
-    ![](media/image16.png){width="6.5in" height="2.0493055555555557in"}
-
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep2.png)
+    
     When the sample runs, you will see the published messages as:
 
-    ![](media/image17.png){width="6.5in" height="2.5597222222222222in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep3.png)
