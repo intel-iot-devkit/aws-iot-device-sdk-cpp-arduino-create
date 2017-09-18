@@ -93,9 +93,7 @@
 ***MONITOR THE TOPIC IN AWS IOT DASHBOARD***
 
 1.  A graphical representation of device connections and messages can be
-    seen on the dashboard.
-
-    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png
+    seen on the ![dashboard](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png
 
 2.  The sample’s published messages can be tested by received by
     subscribing to the topic through the TEST widget.
