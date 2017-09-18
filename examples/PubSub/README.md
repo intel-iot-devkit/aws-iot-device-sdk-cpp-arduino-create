@@ -56,12 +56,12 @@
 12.  Download the four files and click ‘Activate’. Then click ‘Attach a
     Policy’
 
-> ![]((https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
+> ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
 1.  Select the policy created in previous steps. Click ‘Done’.
 
-    ![](media/image12.png){width="6.5in" height="3.7256944444444446in"}
-
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step10.png)
+    
 ***ENTER DETAILS IN SAMPLE***
 
 1.  Enter the endpoint value, the thing name and the client ID in the
