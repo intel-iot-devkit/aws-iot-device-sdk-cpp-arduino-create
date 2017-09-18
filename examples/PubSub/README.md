@@ -43,23 +43,23 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step9.png)
 
-10.  Go to ‘Security’ , then ‘Certificates’ and click on ‘Create Certificate’.
+10. Go to ‘Security’ \> ‘Certificates’ and click on ‘Create Certificate’ 
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png)
 
-11.  Click ‘Create Certificate’ again.
+11. Click ‘Create Certificate’ again
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step6.png)
 
-12.  Download the four files and click ‘Activate’. Then click ‘Attach a Policy’
+12. Download the four files and click ‘Activate’. Then click ‘Attach a Policy’
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
-13.  Select the policy created in previous steps. Click ‘Done’.
+13. Select the policy created in previous steps. Click ‘Done’.
 
-    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step10.png)    
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step10.png)
 
-    
+   
 ***ENTER DETAILS IN SAMPLE***
 
 1.  Enter the endpoint value, the thing name and the client ID in the
