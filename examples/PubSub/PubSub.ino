@@ -69,6 +69,8 @@
 #define LOG_TAG_PUBSUB "[Sample - PubSub]"
 #define MESSAGE_COUNT 5
 #define SDK_SAMPLE_TOPIC "sdk/test/cpp"
+const char* defaultSampleConfig = "{  \"endpoint\": \"a1ugmusbn0c5ok.iot.us-west-2.amazonaws.com\",  \"mqtt_port\": 8883,  \"https_port\": 443,  \"greengrass_discovery_port\": 8443,  \"root_ca_relative_path\": \"rootCA.pem\",  \"device_certificate_relative_path\": \"08493bea83-certificate.pem.crt\",  \"device_private_key_relative_path\": \"08493bea83-private.pem.key\",  \"tls_handshake_timeout_msecs\": 60000,  \"tls_read_timeout_msecs\": 2000,  \"tls_write_timeout_msecs\": 2000,  \"aws_region\": \"us-west-2\",  \"aws_access_key_id\": \"AKIAIENYCALRLAYSPOWA\",  \"aws_secret_access_key\": \"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\",  \"aws_session_token\": \"\",  \"client_id\": \"gateway-test-01\",  \"thing_name\": \"gateway-test-01\",  \"is_clean_session\": true,  \"mqtt_command_timeout_msecs\": 20000,  \"keepalive_interval_secs\": 30,  \"minimum_reconnect_interval_secs\": 1,  \"maximum_reconnect_interval_secs\": 128,  \"maximum_acks_to_wait_for\": 32,  \"action_processing_rate_hz\": 5,  \"maximum_outgoing_action_queue_length\": 32,  \"discover_action_timeout_msecs\": 300000, \"load_crts_as_strings\": true }";
+
 
 namespace awsiotsdk {
     namespace samples {
@@ -272,7 +274,7 @@ void setup() {
     std::unique_ptr<awsiotsdk::samples::PubSub>
         pub_sub = std::unique_ptr<awsiotsdk::samples::PubSub>(new awsiotsdk::samples::PubSub());
 
-    awsiotsdk::ResponseCode rc = awsiotsdk::ConfigCommon::InitializeCommon("config/SampleConfig.json");
+    awsiotsdk::ResponseCode rc = awsiotsdk::ConfigCommon::InitializeCommon(defaultSampleConfig);
     if (awsiotsdk::ResponseCode::SUCCESS == rc) {
         rc = pub_sub->RunSample();
     }
