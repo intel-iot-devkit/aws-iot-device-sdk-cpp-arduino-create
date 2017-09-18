@@ -5,56 +5,58 @@
     <https://aws.amazon.com/console/>
 
 2.  Search for IOT Services and find ‘AWS IoT’
-
-    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step2.png){width="6.5in" height="4.635416666666667in"}
+    
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step1.png)
+    
 
 3.  Click get Started
     
-    ![]https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step3.png){width="6.5in"
-    height="4.160416666666666in"}
-
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step2.png)
+    
 4.  Click on Registry &gt; Things &gt; Register a
     Thing
-    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4.png){width="6.5in"
-    height="3.0097222222222224in"}
+    
+    
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step3.png)
+
+    
 
 5.  Enter a thing name e.g. ‘Thing-01’ and click ‘Create Thing’
 
-    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png){width="6.5in" height="2.254166666666667in"}
-
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4.png)
+    
 6.  The thing would be created. Click on it to see its details.
 
-![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4Result.PNG){width="5.575483377077865in"
-height="3.9586767279090114in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4Result.PNG)
 
-1.  Click on ‘Interact’ and copy the HTTPS endpoint value. This value
+7.  Click on ‘Interact’ and copy the HTTPS endpoint value. This value
     will be used in the sample.
 
-    ![](media/image6.png){width="6.5in" height="5.425in"}
-
-2.  Click the back arrow to get back to the main page and click on
+    (![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step11.png)
+    
+8.  Click the back arrow to get back to the main page and click on
     ‘Security’ &gt; ‘Policies’ . Then click ‘Create a Policy’
 
-    ![](media/image7.png){width="6.5in" height="2.964583333333333in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step8.png)
 
-3.  Give a Name e.g. ‘Policy-01’. Add a statement with Action ‘iot:\*’,
+9.  Give a Name e.g. ‘Policy-01’. Add a statement with Action ‘iot:\*’,
     Resource ARN ‘\*’ and Effect ‘Allow’. Click on ‘CREATE’.
 
-    ![](media/image8.png){width="6.5in" height="4.852083333333334in"}
-
-4.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step9.png)
+    
+10.  Go to ‘Security’ &gt; ‘Certificates’ and click on ‘Create
     Certificate’
 
-    ![](media/image9.png){width="6.5in" height="3.0493055555555557in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step5.png)
 
-5.  Click ‘Create Certificate’ again.
+11.  Click ‘Create Certificate’ again.
 
-    ![](media/image10.png){width="6.5in" height="3.2111111111111112in"}
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step6.png)
 
-6.  Download the four files and click ‘Activate’. Then click ‘Attach a
+12.  Download the four files and click ‘Activate’. Then click ‘Attach a
     Policy’
 
-> ![](media/image11.png){width="6.5in" height="4.448611111111111in"}
+> ![]((https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
 1.  Select the policy created in previous steps. Click ‘Done’.
 
