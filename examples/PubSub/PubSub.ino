@@ -68,9 +68,6 @@
 
 #define LOG_TAG_PUBSUB "[Sample - PubSub]"
 #define MESSAGE_COUNT 5
-const char* rootCAString = (const char*) SECRET_ROOT_CA_STRING_OR_PATH;
-const char* clientCertString = (const char*) SECRET_CLIENT_CERT_STRING_OR_PATH;
-const char* clientKeyString = (const char*) SECRET_CLIENT_PRIVATE_KEY_STRING_OR_PATH;
 
 //The topic to which the device publishes
 #define SDK_SAMPLE_TOPIC "sdk/test/cpp"
@@ -80,6 +77,9 @@ const char* clientKeyString = (const char*) SECRET_CLIENT_PRIVATE_KEY_STRING_OR_
 #define AWS_ACCESS_KEY_ID ""
 #define AWS_SECRET_ACCESS_KEY ""
 #define DEFAULTSAMPLECONFIG "{  \"endpoint\": \"" ENDPOINT "\",  \"mqtt_port\": 8883,  \"https_port\": 443,  \"greengrass_discovery_port\": 8443,  \"root_ca_relative_path\": \"rootCA.pem\",  \"device_certificate_relative_path\": \"34534543-certificate.pem.crt\",  \"device_private_key_relative_path\": \"234234234-private.pem.key\",  \"tls_handshake_timeout_msecs\": 60000,  \"tls_read_timeout_msecs\": 2000,  \"tls_write_timeout_msecs\": 2000,  \"aws_region\": \"us-west-2\",  \"aws_access_key_id\": \"" AWS_ACCESS_KEY_ID "\",  \"aws_secret_access_key\": \"" AWS_SECRET_ACCESS_KEY "\",  \"aws_session_token\": \"\",  \"client_id\": \"" CLIENT_ID "\",  \"thing_name\": \"" THING_NAME "\",  \"is_clean_session\": true,  \"mqtt_command_timeout_msecs\": 20000,  \"keepalive_interval_secs\": 30,  \"minimum_reconnect_interval_secs\": 1,  \"maximum_reconnect_interval_secs\": 128,  \"maximum_acks_to_wait_for\": 32,  \"action_processing_rate_hz\": 5,  \"maximum_outgoing_action_queue_length\": 32,  \"discover_action_timeout_msecs\": 300000, \"load_crts_as_strings\": true }"
+std::string clientCertString;
+std::string clientKeyString; 
+std::string rootCAString ;
 /* This sample needs the Root CA, Device Private Certificate and the device private key.
 This can be provided in three ways.
     1. By using the secret tab to provide the string value. The value should be formatted
@@ -193,9 +193,9 @@ namespace awsiotsdk {
             std::shared_ptr<network::OpenSSLConnection> p_network_connection =
                 std::make_shared<network::OpenSSLConnection>(ConfigCommon::endpoint_,
                                                              ConfigCommon::endpoint_mqtt_port_,
-                                                             rootCAString,
-                                                             clientCertString,
-                                                             clientKeyString,
+                                                             rootCAString.c_str(),
+                                                             clientCertString.c_str(),
+                                                             clientKeyString.c_str(),
                                                              ConfigCommon::tls_handshake_timeout_,
                                                              ConfigCommon::tls_read_timeout_,
                                                              ConfigCommon::tls_write_timeout_, true, ConfigCommon::load_crts_as_strings_);
@@ -298,6 +298,14 @@ namespace awsiotsdk {
 }
 
 void setup() {
+    //Convert the certificate strings to be compatible with SSL
+    const auto targetCrt = std::regex{" (?!CERTIFICATE)"};
+    const auto replacement = "\n";
+    rootCAString = std::regex_replace(SECRET_ROOT_CA_STRING_OR_PATH, targetCrt, replacement);
+    clientCertString = std::regex_replace(SECRET_CLIENT_CERT_STRING_OR_PATH, targetCrt, replacement);
+    const auto targetKey = std::regex{" (?!RSA)(?!PRIVATE)(?!KEY)"};
+    clientKeyString = std::regex_replace(SECRET_CLIENT_PRIVATE_KEY_STRING_OR_PATH, targetKey, replacement);
+
     std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system =
         std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
     awsiotsdk::util::Logging::InitializeAWSLogging(p_log_system);
