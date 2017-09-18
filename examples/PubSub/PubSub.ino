@@ -68,11 +68,40 @@
 
 #define LOG_TAG_PUBSUB "[Sample - PubSub]"
 #define MESSAGE_COUNT 5
-#define SDK_SAMPLE_TOPIC "sdk/test/cpp"
-const char* defaultSampleConfig = "{  \"endpoint\": \"a1ugmusbn0c5ok.iot.us-west-2.amazonaws.com\",  \"mqtt_port\": 8883,  \"https_port\": 443,  \"greengrass_discovery_port\": 8443,  \"root_ca_relative_path\": \"rootCA.pem\",  \"device_certificate_relative_path\": \"08493bea83-certificate.pem.crt\",  \"device_private_key_relative_path\": \"08493bea83-private.pem.key\",  \"tls_handshake_timeout_msecs\": 60000,  \"tls_read_timeout_msecs\": 2000,  \"tls_write_timeout_msecs\": 2000,  \"aws_region\": \"us-west-2\",  \"aws_access_key_id\": \"AKIAIENYCALRLAYSPOWA\",  \"aws_secret_access_key\": \"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\",  \"aws_session_token\": \"\",  \"client_id\": \"gateway-test-01\",  \"thing_name\": \"gateway-test-01\",  \"is_clean_session\": true,  \"mqtt_command_timeout_msecs\": 20000,  \"keepalive_interval_secs\": 30,  \"minimum_reconnect_interval_secs\": 1,  \"maximum_reconnect_interval_secs\": 128,  \"maximum_acks_to_wait_for\": 32,  \"action_processing_rate_hz\": 5,  \"maximum_outgoing_action_queue_length\": 32,  \"discover_action_timeout_msecs\": 300000, \"load_crts_as_strings\": true }";
 const char* rootCAString = (const char*) SECRET_ROOT_CA_STRING;
 const char* clientCertString = (const char*) SECRET_CLIENT_CERT_STRING;
 const char* clientKeyString = (const char*) SECRET_CLIENT_KEY_STRING;
+
+//The topic to which the device publishes
+#define SDK_SAMPLE_TOPIC "sdk/test/cpp"
+
+/* The default sample config can be provided here or through a json file on the device."
+const char* defaultSampleConfig = "{  \"endpoint\": \"a1ugmusbn0c5ok.iot.us-west-2.amazonaws.com\",  \"mqtt_port\": 8883,  \"https_port\": 443,  \"greengrass_discovery_port\": 8443,  \"root_ca_relative_path\": \"rootCA.pem\",  \"device_certificate_relative_path\": \"08493bea83-certificate.pem.crt\",  \"device_private_key_relative_path\": \"08493bea83-private.pem.key\",  \"tls_handshake_timeout_msecs\": 60000,  \"tls_read_timeout_msecs\": 2000,  \"tls_write_timeout_msecs\": 2000,  \"aws_region\": \"us-west-2\",  \"aws_access_key_id\": \"AKIAIENYCALRLAYSPOWA\",  \"aws_secret_access_key\": \"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\",  \"aws_session_token\": \"\",  \"client_id\": \"gateway-test-01\",  \"thing_name\": \"gateway-test-01\",  \"is_clean_session\": true,  \"mqtt_command_timeout_msecs\": 20000,  \"keepalive_interval_secs\": 30,  \"minimum_reconnect_interval_secs\": 1,  \"maximum_reconnect_interval_secs\": 128,  \"maximum_acks_to_wait_for\": 32,  \"action_processing_rate_hz\": 5,  \"maximum_outgoing_action_queue_length\": 32,  \"discover_action_timeout_msecs\": 300000, \"load_crts_as_strings\": true }";
+
+
+
+/* This sample needs the Root CA, Device Private Certificate and the device private key.
+This can be provided in three ways.
+    1. By using the secret tab to provide the string value. The value should be formatted
+    to be of format
+    "-----BEGIN CERTIFICATE-----\nMIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhki\n...."
+    This format can be done manually
+    or by using the unix command : awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' cert-name.pem
+    or by using the helper function : formatCertString as is the default behavior of this sample.
+
+    2. By putting the certificate files on the device and updating the file name in
+    sample config value. This is the most secure way and recommended for production. The Sample
+
+    2. By providing inline
+    const char* rootCAString =
+    "-----BEGIN CERTIFICATE-----\n"
+    "MIIE0zCCA7ugAwIBAgIQGNrRniZ96LtKIVjNzGs7SjANBgkqhkiG9w0BAQUFADCB\n"
+    .
+    .
+    "hnacRHr2lVz2XTIIM6RUthg/aFzyQkqFOFSDX9HoLPKsEdao7WNq\n"
+    "-----END CERTIFICATE-----";
+*/
+
 
 namespace awsiotsdk {
     namespace samples {
@@ -276,6 +305,7 @@ void setup() {
     std::unique_ptr<awsiotsdk::samples::PubSub>
         pub_sub = std::unique_ptr<awsiotsdk::samples::PubSub>(new awsiotsdk::samples::PubSub());
 
+    //Or use awsiotsdk::ResponseCode rc = awsiotsdk::ConfigCommon::InitializeCommon("SampelConfig.json");
     awsiotsdk::ResponseCode rc = awsiotsdk::ConfigCommon::InitializeCommon(defaultSampleConfig);
     if (awsiotsdk::ResponseCode::SUCCESS == rc) {
         rc = pub_sub->RunSample();
