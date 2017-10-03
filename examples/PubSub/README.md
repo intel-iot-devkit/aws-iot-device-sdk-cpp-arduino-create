@@ -101,9 +101,9 @@
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png)
 
 2.  The sample’s published messages can be tested by received by
-    subscribing to the topic through the Test widget.  You can navigate to the Test widget from console https://aws.amazon.com/console/.
+    subscribing to the topic through the Test widget.  Navigate to the Test widget from the console https://aws.amazon.com/console/.
 
-    Click on ‘TEST’ and enter the name of the thing that was created
+    Enter the name of the thing that was created
     earlier e.g. ‘thing-01’. Client ID and thing name are same. Click
     ‘Connect’.
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep1.png)
