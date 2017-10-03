@@ -1,4 +1,4 @@
-***SET UP AWS PORTAL***
+## Set up AWS portal
 
 1.  Go to AWS IOT console and register or sign in.
 
@@ -25,7 +25,7 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4.png)
     
-6.  The thing would be created. Click on it to see its details.
+6.  The thing is now created. Click on it to see its details.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step4Result.PNG)
 
@@ -55,20 +55,24 @@
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step7.png)
 
-13. Select the policy created in previous steps. Click ‘Done’.
+13. Select the policy created in the previous steps. Click ‘Done’.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Step10.png)
 
    
-***ENTER DETAILS IN SAMPLE***
+## Enter details in sample
 
-1.  Enter the endpoint value, the thing name and the client ID in the
+1.  Open the PubSub example in Arduino Create **Libraries>AWS IOT DEVICE SDK>Examples>PubSub**
+
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/SampleStep0.png)
+
+2.  Enter the endpoint value, the thing name and the client ID in the
     sample file’s \#define. The client ID and thing name are same.
     Update the sample pub-sub topic if you want.
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/SampleStep1.png)
 
-    2\. Switch to the SECRET tab. Open the files downloaded as text file and
+3.  Switch to the SECRET tab. Open the files downloaded as text file and
     copy the string to the entries in the secret tab.
 
     SECRET\_ROOT\_CA : Content of file “VeriSign-Class
@@ -91,13 +95,13 @@
     This will load the certificates from those file paths instead of as
     strings.
 
-***MONITOR THE TOPIC IN AWS IOT DASHBOARD***
+## Monitor the topic in AWS IoT dashboard
 
-1.  A graphical representation of device connections and messages can be
-    seen on the ![dashboard](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png)
+1.  Go to the Dashboard (you can navigate to it in the left menu from the console https://aws.amazon.com/console/). A graphical representation of device connections and messages can be seen.  You should see a connection corresponding to the time you ran the sketch.
+    ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/Dashboard.png)
 
 2.  The sample’s published messages can be tested by received by
-    subscribing to the topic through the TEST widget.
+    subscribing to the topic through the Test widget.  You can navigate to the Test widget from console https://aws.amazon.com/console/.
 
     Click on ‘TEST’ and enter the name of the thing that was created
     earlier e.g. ‘thing-01’. Client ID and thing name are same. Click
@@ -105,9 +109,9 @@
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep1.png)
     
     Enter the topic that the sample is configured to. This is the value
-    of SDK\_SAMPLE\_TOPIC in the program. Click ‘Subscribe to Topic’
+    of SDK\_SAMPLE\_TOPIC in the program, which is 'sdk/test/cpp' in this case. Click ‘Subscribe to Topic’
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep2.png)
     
-    When the sample runs, you will see the published messages as:
+    When the sample runs, you will see the published messages, like below:
 
     ![](https://github.com/intel-iot-devkit/aws-iot-device-sdk-cpp-arduino-create/blob/master/extras/MonitorStep3.png)
